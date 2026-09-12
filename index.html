@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi niña bonita ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #ffeef2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(230, 100, 130, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos del Sobre en CSS */
+        .envelope-wrapper {
+            position: relative;
+            width: 200px;
+            height: 140px;
+            background-color: #ff85a2;
+            margin: 10px auto 30px auto;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Solapa superior del sobre */
+        .envelope-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-top: 75px solid #ff6584;
+            transform-origin: top;
+            transition: transform 0.6s ease;
+            z-index: 2;
+        }
+
+        /* Interior del sobre con la carta */
+        .letter-preview {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            width: 170px;
+            height: 100px;
+            background: #fff;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+            transition: transform 0.6s ease;
+        }
+
+        /* Animación cuando se abre el sobre */
+        .envelope-wrapper.open::before {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-wrapper.open .letter-preview {
+            transform: translateY(-40px);
+        }
+
+        /* Formulario y Pregunta */
+        .password-section {
+            margin-top: 10px;
+        }
+
+        .question {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input[type="password"], input[type="text"] {
+            padding: 12px;
+            border: 2px solid #ffcad4;
+            border-radius: 10px;
+            outline: none;
+            text-align: center;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #ff4d6d;
+        }
+
+        button {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #e63956;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .error-message {
+            color: #e63956;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Mi niña bonita, tengo una carta para ti 💌</h1>
+
+        <!-- Ilustración del Sobre -->
+        <div class="envelope-wrapper" id="envelope">
+            <div class="letter-preview">💖</div>
+        </div>
+
+        <!-- Sección de Contraseña -->
+        <div class="password-section">
+            <p class="question">Revisa el chat...</p>
+            
+            <form id="lockForm" onsubmit="validarClave(event)">
+                <div class="input-group">
+                    <input 
+                        type="password" 
+                        id="passwordInput" 
+                        placeholder="Escribe la respuesta aquí..." 
+                        required
+                    >
+                    <button type="submit">Abrir carta</button>
+                </div>
+            </form>
+            <p class="error-message" id="errorMsg">Respuesta incorrecta, ¡inténtalo de nuevo, mi amor! 🙈</p>
+        </div>
+    </div>
+
+    <script>
+        // Define aquí la contraseña correcta (puedes cambiarla por lo que quieras)
+        const CLAVE_CORRECTA = "VSYDO-03/02/2026"; 
+
+        function validarClave(event) {
+            event.preventDefault(); // Evita que se recargue la página
+            
+            const entrada = document.getElementById('passwordInput').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+            const envelope = document.getElementById('envelope');
+
+            if (entrada.toLowerCase() === CLAVE_CORRECTA.toLowerCase()) {
+                errorMsg.style.display = 'none';
+                
+                // Animar el sobre abriéndose
+                envelope.classList.add('open');
+
+                // Redirigir a mensaje.html después de 1.2 segundos para ver la animación
+                setTimeout(() => {
+                    window.location.href = 'mensaje.html';
+                }, 1200);
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+    </script>
+
+</body>
+</html>
